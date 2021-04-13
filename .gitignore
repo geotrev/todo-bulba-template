@@ -1,0 +1,5 @@
+.DS_store
+npm-error.log*
+
+node_modules/
+app/public/bundle.js
