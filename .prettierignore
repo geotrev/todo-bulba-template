@@ -1,3 +1,2 @@
 node_modules/
-app/dist/
-app/src/_reset.scss
+app/public/reset.css

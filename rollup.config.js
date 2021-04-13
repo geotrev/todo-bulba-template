@@ -16,7 +16,7 @@ const scssOptions = {
   processor: () => postcss([autoprefixer]),
   sass,
   output: false,
-  outputStyle: "compressed",
+  // outputStyle: "compressed",
 }
 
 export default {

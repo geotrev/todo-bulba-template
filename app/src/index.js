@@ -1,7 +1,8 @@
 import { UpgradedElement, register } from "upgraded-element"
-// import "./todo-nav"
-// import "./todo-body"
-// import "./todo-footer"
+import "./utils/create-theme.js"
+import "./todo-nav"
+import "./todo-body"
+import "./todo-footer"
 import styles from "./styles.scss"
 
 class TodoApp extends UpgradedElement {
