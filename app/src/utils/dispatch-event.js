@@ -1,7 +1,8 @@
-export function dispatch(name, detail) {
-  return new CustomEvent(name, {
+export function dispatch(source, name, data) {
+  const event = new CustomEvent(name, {
     bubbles: true,
     cancelable: true,
-    detail,
+    detail: { data },
   })
+  source.dispatchEvent(event)
 }
