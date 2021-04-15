@@ -9,7 +9,7 @@ export const addTodo = () => {
 
 export const editTodo = (event) => {
   const { detail } = event
-  const todos = getState().todos
+  const { todos } = getState()
   const length = todos.length
 
   for (let i = 0; i < length; i++) {
@@ -23,7 +23,7 @@ export const editTodo = (event) => {
 
 export const deleteTodo = (event) => {
   const { detail } = event
-  const todos = getState().todos
+  const { todos } = getState()
   const index = todos.findIndex((item) => item.id === detail.id)
 
   todos.splice(index, 1)
