@@ -1,6 +1,5 @@
 import { UpgradedElement, register } from "upgraded-element"
-import { dispatch } from "../utils/dispatch"
-import { ADD_TODO } from "../utils/action-types"
+import { dispatch, actionTypes } from "../utils"
 import styles from "./styles.scss"
 
 class TodoHeader extends UpgradedElement {
@@ -23,7 +22,7 @@ class TodoHeader extends UpgradedElement {
   }
 
   handleClick() {
-    dispatch(ADD_TODO)
+    dispatch(actionTypes.ADD_TODO)
     // dispatch(EDIT_TODO, {id: this.value, value: this.elementId})
     // dispatch(DELETE_TODO, {id: event.target.id})
   }
