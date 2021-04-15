@@ -1,0 +1,45 @@
+@use "../host";
+
+:host {
+  display: block;
+}
+
+.todo-header {
+  display: flex;
+  justify-content: space-between;
+  align-content: stretch;
+  color: var(--color-copper);
+  font-family: "Courier New", Courier, monospace;
+  box-sizing: border-box;
+
+  &--heading {
+    background-color: var(--color-bistre);
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    margin: 0;
+    font-size: 3.5rem;
+  }
+
+  &--add-todo {
+    display: block;
+    color: var(--color-copper);
+    font-weight: 600;
+    font-size: 3.5rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
+    font-family: "Courier New", Courier, monospace;
+    border: none;
+    background-color: var(--color-bistre);
+    border: 0.25rem solid transparent;
+    transition: 0.25s ease;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      background: transparent;
+      color: var(--color-bistre);
+      border: 0.25rem solid var(--color-bistre);
+    }
+  }
+}
