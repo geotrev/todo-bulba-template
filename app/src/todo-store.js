@@ -1,6 +1,6 @@
-import { createStore, actionTypes, actions } from "../utils"
+import { create, actionTypes, actions } from "./utils"
 
-createStore([
+create([
   {
     type: actionTypes.ADD_TODO,
     dispatch: actions.addTodo,
