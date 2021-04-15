@@ -9,7 +9,7 @@ export const getState = () => {
   return { ...state }
 }
 
-export const createStore = (actions = []) => {
+export const create = (actions = []) => {
   for (const action of actions) {
     document.documentElement.addEventListener(action.type, action.dispatch)
   }
