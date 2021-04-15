@@ -1,0 +1,15 @@
+@use "../host";
+
+:host {
+  display: block;
+}
+
+.todo-footer {
+  margin-block-start: 2rem;
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: end;
+  color: var(--color-tumbleweed);
+}

@@ -10,6 +10,8 @@ import "./todo-footer"
 
 import styles from "./styles.scss"
 
+// define the store
+
 createStore([
   {
     type: actionTypes.ADD_TODO,
@@ -24,6 +26,8 @@ createStore([
     dispatch: actions.deleteTodo,
   },
 ])
+
+// define the app
 
 class TodoApp extends UpgradedElement {
   static get styles() {
