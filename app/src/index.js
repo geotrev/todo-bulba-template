@@ -1,6 +1,6 @@
 import { UpgradedElement, register } from "upgraded-element"
-import "./store/todo-store"
-import "./create-theme.js"
+import "./todo-store"
+import "./theme.js"
 
 import "./todo-header"
 import "./todo-body"
