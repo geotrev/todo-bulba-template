@@ -24,7 +24,7 @@ class TodoHeader extends UpgradedElement {
 
   handleClick() {
     dispatch(ADD_TODO)
-    // dispatch(EDIT_TODO, {id: event.target.id, value: event.target.value})
+    // dispatch(EDIT_TODO, {id: this.value, value: this.elementId})
     // dispatch(DELETE_TODO, {id: event.target.id})
   }
 
