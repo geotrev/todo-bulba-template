@@ -8,7 +8,7 @@ import sass from "sass"
 import postcss from "postcss"
 import autoprefixer from "autoprefixer"
 
-const APP_PATH = path.resolve(__dirname, "app")
+const APP_PATH = path.resolve(__dirname, "app/public")
 const SOURCE_PATH = APP_PATH + "/src/index.js"
 const OUTPUT_PATH = APP_PATH + "/public/bundle.js"
 
