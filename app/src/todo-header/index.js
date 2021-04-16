@@ -22,7 +22,7 @@ class TodoHeader extends UpgradedElement {
   }
 
   handleClick() {
-    dispatch(this, actionTypes.ADD_TODO)
+    dispatch(actionTypes.ADD_TODO)
   }
 
   render() {
