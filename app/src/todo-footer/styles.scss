@@ -13,3 +13,10 @@
   text-align: end;
   color: var(--color-tumbleweed);
 }
+
+a {
+  &,
+  &:visited {
+    color: var(--color-peach);
+  }
+}

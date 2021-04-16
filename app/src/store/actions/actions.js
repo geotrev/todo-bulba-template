@@ -4,7 +4,7 @@ import { v4 as createUUID } from "uuid"
 const { getState, setState } = store
 
 // dispatch(actionTypes.ADD_TODO)
-export const addTodo = (event) => {
+export const addTodo = () => {
   const { todos } = getState()
 
   // if already writing a draft, don't create a new todo
@@ -37,6 +37,11 @@ export const deleteTodo = (event) => {
   const { detail } = event
   const { todos } = getState()
   const index = todos.findIndex((item) => item.id === detail.id)
+
+  if (index === -1) {
+    // eslint-disable-next-line no-console
+    return console.error(`[TODO]: Couldn't find todo with id ${detail.id}.`)
+  }
 
   todos.splice(index, 1)
   setState({ todos })

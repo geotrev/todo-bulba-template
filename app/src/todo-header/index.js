@@ -28,8 +28,13 @@ class TodoHeader extends UpgradedElement {
   render() {
     return `
       <header class="todo-header">
-        <h1 class="todo-header--heading">/TOODOO</h1>
-        <button class="todo-header--add-todo" id='add'>+</button>
+        <h1 class="todo-header--heading">
+          <span aria-hidden="true">/</span>TooDoo
+        </h1>
+        <button class="todo-header--add-todo" id='add'>
+          <span class="todo-header--add-todo--plus">+</span>
+          <span class="todo-header--add-todo--text">Add Todo</span>
+        </button>
       </header>
     `
   }
