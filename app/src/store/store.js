@@ -2,6 +2,8 @@ let state = {
   todos: [],
 }
 
+window.appState = state
+
 export const setState = (nextState = {}) => {
   state = { ...state, ...nextState }
 }
@@ -11,6 +13,6 @@ export const getState = () => {
 
 export const create = (actions = []) => {
   for (const action of actions) {
-    document.documentElement.addEventListener(action.type, action.dispatch)
+    document.addEventListener(action.type, action.dispatch)
   }
 }

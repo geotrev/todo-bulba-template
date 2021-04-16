@@ -1,4 +1,5 @@
-import { store, actionTypes, actions } from "./utils"
+import { store } from "./store"
+import { actionTypes, actions } from "./store/actions"
 
 store.create([
   {

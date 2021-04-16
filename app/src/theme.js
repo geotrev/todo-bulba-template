@@ -1,4 +1,4 @@
-import vars from "../vars.scss"
+import vars from "./vars.scss"
 
 const styleEl = document.createElement("style")
 styleEl.textContent = vars
