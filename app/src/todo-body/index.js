@@ -46,8 +46,8 @@ class TodoBody extends UpgradedElement {
   }
 
   addTodoEvents(todoElement) {
-    const deleteBtn = todoElement.querySelector(".delete")
-    const input = todoElement.querySelector("input")
+    const deleteBtn = todoElement.querySelector(".todo--delete")
+    const input = todoElement.querySelector(".todo--input")
     deleteBtn.addEventListener("click", this.handleDelete)
     input.addEventListener("input", this.debounceInput)
   }
@@ -55,9 +55,9 @@ class TodoBody extends UpgradedElement {
   handleDelete(event) {
     const todoElement = event.target.parentElement
 
-    const deleteBtn = todoElement.querySelector(".delete")
+    const deleteBtn = todoElement.querySelector(".todo--delete")
     deleteBtn.removeEventListener("click", this.handleDelete)
-    const input = todoElement.querySelector("input")
+    const input = todoElement.querySelector(".todo--input")
     input.removeEventListener("input", this.debounceInput)
 
     dispatch(this, actionTypes.DELETE_TODO, {
@@ -68,20 +68,23 @@ class TodoBody extends UpgradedElement {
   handleInput(event) {
     dispatch(this, actionTypes.SAVE_TODO, {
       id: event.path[0].parentElement.id,
-      value: event.path[0].value,
+      value: event.path[0].textContent,
     })
   }
 
   storeUpdated(state) {
     this.store = state
+    console.log(state)
   }
 
   renderTodos() {
+    // make todo--delete button a shared element from todo-header
+
     return this.store.todos.reduce((todos, todo) => {
       todos += `
         <div class="todo" data-key='${todo.id}' id='${todo.id}'>
-          <input class="todo-input" value='${todo.value}' />
-          <button class="delete">Delete</button>
+          <div class="todo--input" contenteditable="true"></div>
+          <button class="todo--delete">Delete</button>
         </div>
       `
       return todos

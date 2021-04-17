@@ -1,7 +1,22 @@
+@use "sass:color" as color;
+
+@function hex-to-rgb($hex) {
+  @return color.red($hex), color.green($hex), color.blue($hex);
+}
+
 :root {
   --color-pewter: #9cafb7;
+  --color-pewter-rgb: #{hex-to-rgb(#9cafb7)};
+
   --color-peach: #f7dba7;
+  --color-peach-rgb: #{hex-to-rgb(#f7dba7)};
+
   --color-tumbleweed: #f1ab86;
+  --color-tumbleweed-rgb: #{hex-to-rgb(#f1ab86)};
+
   --color-copper: #c57b57;
+  --color-copper-rgb: #{hex-to-rgb(#c57b57)};
+
   --color-bistre: #251605;
+  --color-bistre-rgb: #{hex-to-rgb(#251605)};
 }
