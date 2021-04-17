@@ -1,7 +1,10 @@
-export const dispatch = (type, detail = {}) => {
+import * as actionTypes from "./action-types"
+
+export const dispatch = (source, type, detail = {}) => {
   const event = new CustomEvent(type, {
     composed: true,
+    bubbles: type !== actionTypes.STORE_UPDATED,
     detail,
   })
-  document.dispatchEvent(event)
+  source.dispatchEvent(event)
 }
