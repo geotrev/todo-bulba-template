@@ -3,7 +3,7 @@ import * as actionTypes from "./action-types"
 import * as actions from "./actions"
 
 const initialState = {
-  todos: [],
+  todos: [{ id: "foo-bar", draft: true }],
 }
 
 store.create(initialState, [

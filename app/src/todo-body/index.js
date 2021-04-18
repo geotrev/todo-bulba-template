@@ -12,8 +12,8 @@ class TodoBody extends UpgradedElement {
   static get properties() {
     return {
       todos: {
-        default: store.getState().todos,
-        type: "object",
+        default: [],
+        type: "array",
       },
     }
   }
@@ -24,15 +24,14 @@ class TodoBody extends UpgradedElement {
 
   constructor() {
     super()
-
-    this.storeUpdated = this.storeUpdated.bind(this)
+    store.subscribe(this, ["todos"])
     this.handleDelete = this.handleDelete.bind(this)
     this.addTodoEvents = this.addTodoEvents.bind(this)
+    this.handleInput = this.handleInput.bind(this)
     this.debounceInput = debounce(this.handleInput, 500)
   }
 
   elementDidMount() {
-    store.subscribe(this, this.storeUpdated)
     this.registerTodos()
   }
 
@@ -74,10 +73,6 @@ class TodoBody extends UpgradedElement {
       id: event.path[0].parentElement.id,
       value: event.path[0].textContent,
     })
-  }
-
-  storeUpdated(state) {
-    this.todos = state.todos
   }
 
   renderTodos() {

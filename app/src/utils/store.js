@@ -1,7 +1,7 @@
+import get from "lodash/get"
 import cloneDeep from "lodash/cloneDeep"
-import * as actionTypes from "./action-types"
-import { dispatch } from "./dispatch"
 
+const subscriptions = []
 let state = {}
 
 export const getState = () => {
@@ -12,15 +12,15 @@ export const setState = (nextState = {}) => {
   state = { ...getState(), ...nextState }
 }
 
-const subscriptions = []
+const getPropName = (path) => {
+  const parts = path.split(".")
+  return parts[parts.length - 1]
+}
 
-export const subscribe = (element, cb) => {
-  if (!element || !cb) return
-
-  element.addEventListener(actionTypes.STORE_UPDATED, (event) => {
-    cb(event.detail)
+const hydrateElement = (element, properties) => {
+  properties.forEach((path) => {
+    element[getPropName(path)] = get(getState(), path)
   })
-  subscriptions.push(element)
 }
 
 const updateSubscribers = (nextState) => {
@@ -28,9 +28,22 @@ const updateSubscribers = (nextState) => {
 
   setState(nextState)
 
-  subscriptions.forEach((subscriber) => {
-    dispatch(subscriber, actionTypes.STORE_UPDATED, getState())
+  subscriptions.forEach(([element, subscribedProperties]) => {
+    hydrateElement(element, subscribedProperties)
   })
+}
+
+export const subscribe = (element, subscribedProperties = []) => {
+  if (
+    !element ||
+    !Array.isArray(subscribedProperties) ||
+    !subscribedProperties.length
+  ) {
+    return
+  }
+
+  hydrateElement(element, subscribedProperties)
+  subscriptions.push([element, subscribedProperties])
 }
 
 export const create = (defaultState, actions = []) => {
