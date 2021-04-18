@@ -1,5 +1,6 @@
 import cloneDeep from "lodash/cloneDeep"
-import { actionTypes, dispatch } from "./actions"
+import * as actionTypes from "./action-types"
+import { dispatch } from "./dispatch"
 
 let state = {}
 

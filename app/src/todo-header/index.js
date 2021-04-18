@@ -1,5 +1,10 @@
-import { UpgradedElement, register } from "upgraded-element"
-import { dispatch, actionTypes } from "../store/actions"
+import {
+  UpgradedElement,
+  register,
+} from "upgraded-element/lib/upgraded-element.es.js"
+import * as actionTypes from "../todo-action-types"
+import { dispatch } from "../store"
+import "../shared/todo-action-button"
 import styles from "./styles.scss"
 
 class TodoHeader extends UpgradedElement {
@@ -13,7 +18,7 @@ class TodoHeader extends UpgradedElement {
   }
 
   elementDidMount() {
-    this.button = this.shadowRoot.querySelector("#add")
+    this.button = this.shadowRoot.querySelector("todo-action-button")
     this.button.addEventListener("click", this.handleClick)
   }
 
@@ -31,10 +36,7 @@ class TodoHeader extends UpgradedElement {
         <h1 class="todo-header--heading">
           <span aria-hidden="true">/</span>TooDoo
         </h1>
-        <button class="todo-header--add-todo" id='add'>
-          <span class="todo-header--add-todo--plus">+</span>
-          <span class="todo-header--add-todo--text">Add Todo</span>
-        </button>
+        <todo-action-button icon="+" size="lg">Add Todo</todo-action-button>
       </header>
     `
   }

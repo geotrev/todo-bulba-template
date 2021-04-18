@@ -1,7 +1,11 @@
 import debounce from "lodash/debounce"
-import { UpgradedElement, register } from "upgraded-element"
-import { dispatch, actionTypes } from "../store/actions"
-import { store } from "../store"
+import "../shared/todo-action-button"
+import {
+  UpgradedElement,
+  register,
+} from "upgraded-element/lib/upgraded-element.es.js"
+import * as actionTypes from "../todo-action-types"
+import { dispatch, store } from "../store"
 import styles from "./styles.scss"
 
 class TodoBody extends UpgradedElement {
@@ -46,7 +50,7 @@ class TodoBody extends UpgradedElement {
   }
 
   addTodoEvents(todoElement) {
-    const deleteBtn = todoElement.querySelector(".todo--delete")
+    const deleteBtn = todoElement.querySelector("todo-action-button")
     const input = todoElement.querySelector(".todo--input")
     deleteBtn.addEventListener("click", this.handleDelete)
     input.addEventListener("input", this.debounceInput)
@@ -55,7 +59,7 @@ class TodoBody extends UpgradedElement {
   handleDelete(event) {
     const todoElement = event.target.parentElement
 
-    const deleteBtn = todoElement.querySelector(".todo--delete")
+    const deleteBtn = todoElement.querySelector("todo-action-button")
     deleteBtn.removeEventListener("click", this.handleDelete)
     const input = todoElement.querySelector(".todo--input")
     input.removeEventListener("input", this.debounceInput)
@@ -74,17 +78,20 @@ class TodoBody extends UpgradedElement {
 
   storeUpdated(state) {
     this.store = state
-    console.log(state)
   }
 
   renderTodos() {
-    // make todo--delete button a shared element from todo-header
+    if (!this.store.todos.length) {
+      return `
+        <p>You're done! Rejoice! :)<br/><br/>Or... create more todos!</p>
+      `
+    }
 
     return this.store.todos.reduce((todos, todo) => {
       todos += `
         <div class="todo" data-key='${todo.id}' id='${todo.id}'>
           <div class="todo--input" contenteditable="true"></div>
-          <button class="todo--delete">Delete</button>
+          <todo-action-button icon="–">Delete</todo-action-button>
         </div>
       `
       return todos

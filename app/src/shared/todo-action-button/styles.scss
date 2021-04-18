@@ -1,0 +1,62 @@
+@use "../sass/host";
+
+:host {
+  display: inline-block;
+}
+
+.todo-action-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-copper);
+  font-weight: 600;
+  font-family: "Courier New", Courier, monospace;
+  border: none;
+  background-color: var(--color-bistre);
+  border: 0.25rem solid transparent;
+  transition: 0.25s ease;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  $this: &;
+
+  &--icon {
+    line-height: 1;
+    margin-inline-end: 0.5rem;
+  }
+
+  &--text {
+    text-transform: uppercase;
+  }
+
+  &.lg {
+    padding: 0.5rem;
+
+    #{$this}--icon {
+      font-size: 2.4rem;
+    }
+
+    #{$this}--text {
+      font-size: 1rem;
+    }
+  }
+
+  &.md {
+    padding: 0.25rem;
+
+    #{$this}--icon {
+      font-size: 1.6rem;
+    }
+
+    #{$this}--text {
+      font-size: 0.75rem;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    background: transparent;
+    color: var(--color-bistre);
+    border: 0.25rem solid var(--color-bistre);
+  }
+}

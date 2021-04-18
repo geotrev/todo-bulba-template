@@ -1,13 +1,9 @@
 import { store } from "./store"
-import { actionTypes, actions } from "./store/actions"
+import * as actionTypes from "./todo-action-types"
+import * as actions from "./todo-actions"
 
 const initialState = {
-  todos: [
-    {
-      id: "foo-bar",
-      value: "Make a todo!",
-    },
-  ],
+  todos: [],
 }
 
 store.create(initialState, [

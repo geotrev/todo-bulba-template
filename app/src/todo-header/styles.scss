@@ -1,4 +1,4 @@
-@use "../sass/host";
+@use "../shared/sass/host";
 
 :host {
   display: block;
@@ -7,53 +7,21 @@
 .todo-header {
   display: flex;
   justify-content: space-between;
-  align-content: stretch;
+  align-content: center;
+  align-items: center;
   color: var(--color-copper);
   font-family: "Courier New", Courier, monospace;
   box-sizing: border-box;
   margin-block-end: 2rem;
 
   &--heading {
+    display: flex;
+    align-items: center;
     background-color: var(--color-bistre);
     font-weight: 600;
     padding: 0.75rem 1rem;
     margin: 0;
     font-size: 3.5rem;
     text-transform: uppercase;
-  }
-
-  &--add-todo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: var(--color-copper);
-    font-weight: 600;
-    padding-inline-start: 0.45rem;
-    padding-inline-end: 0.45rem;
-    font-family: "Courier New", Courier, monospace;
-    border: none;
-    background-color: var(--color-bistre);
-    border: 0.25rem solid transparent;
-    transition: 0.25s ease;
-    box-sizing: border-box;
-    cursor: pointer;
-
-    &--plus {
-      font-size: 3.5rem;
-      line-height: 0.75;
-    }
-
-    &--text {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-    }
-
-    &:hover,
-    &:focus {
-      background: transparent;
-      color: var(--color-bistre);
-      border: 0.25rem solid var(--color-bistre);
-    }
   }
 }

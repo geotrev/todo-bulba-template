@@ -1,20 +1,28 @@
-@use "../sass/host";
+@use "../shared/sass/host";
+
+.todo-body {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
 
 .todo {
   display: flex;
-  font-family: "Courier New", Courier, monospace;
+  align-items: flex-end;
+  align-content: stretch;
+  padding-block-end: 0.25rem;
   margin-block-end: 1.5rem;
 
   &--input {
+    font-family: inherit;
     font-size: 2.5rem;
     min-width: 9rem;
     max-width: 100%;
     outline: none;
-    padding-block-end: 0.5rem;
+    margin-inline-end: 1rem;
+    border-block-start: none;
     border-block-end: 3px solid rgba(var(--color-bistre-rgb), 0.5);
-  }
-
-  &--delete {
-    margin-inline-start: 1rem;
+    border-inline-start: none;
+    border-inline-end: none;
+    background-color: transparent;
   }
 }
