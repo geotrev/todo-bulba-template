@@ -4,8 +4,8 @@ import {
   UpgradedElement,
   register,
 } from "upgraded-element/lib/upgraded-element.es.js"
-import * as actionTypes from "../todo-action-types"
-import { dispatch, store } from "../store"
+import * as actionTypes from "../store/action-types"
+import { dispatch, store } from "../utils"
 import styles from "./styles.scss"
 
 class TodoBody extends UpgradedElement {

@@ -1,6 +1,6 @@
-import { store } from "./store"
-import * as actionTypes from "./todo-action-types"
-import * as actions from "./todo-actions"
+import { store } from "../utils"
+import * as actionTypes from "./action-types"
+import * as actions from "./actions"
 
 const initialState = {
   todos: [],
