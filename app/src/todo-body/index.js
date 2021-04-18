@@ -11,8 +11,8 @@ import styles from "./styles.scss"
 class TodoBody extends UpgradedElement {
   static get properties() {
     return {
-      store: {
-        default: store.getState(),
+      todos: {
+        default: store.getState().todos,
         type: "object",
       },
     }
@@ -37,7 +37,7 @@ class TodoBody extends UpgradedElement {
   }
 
   elementDidUpdate() {
-    const newTodo = this.store.todos[0]
+    const newTodo = this.todos[0]
 
     if (newTodo && newTodo.draft) {
       this.addTodoEvents(this.shadowRoot.querySelector(".todo"))
@@ -77,17 +77,18 @@ class TodoBody extends UpgradedElement {
   }
 
   storeUpdated(state) {
-    this.store = state
+    this.todos = state.todos
   }
 
   renderTodos() {
-    if (!this.store.todos.length) {
+    if (!this.todos.length) {
       return `
-        <p>You're done! Rejoice! :)<br/><br/>Or... create more todos!</p>
+        <p>You're done! Rejoice! :)</p>
+        <p>Or... create more todos!</p>
       `
     }
 
-    return this.store.todos.reduce((todos, todo) => {
+    return this.todos.reduce((todos, todo) => {
       todos += `
         <div class="todo" data-key='${todo.id}' id='${todo.id}'>
           <div class="todo--input" contenteditable="true"></div>
