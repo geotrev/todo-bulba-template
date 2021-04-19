@@ -47,15 +47,14 @@ export const subscribe = (element, subscribedProperties = []) => {
   subscriptions.push([element, subscribedProperties])
 }
 
-export const create = (defaultState, actions = []) => {
+export const create = (defaultState, reducer) => {
   state = defaultState
 
   for (const action of actions) {
-    const {type, dispatch} = action
-    document.addEventListener(type, async (event) => {
-      const nextState = dispatch.constructor.name === ASYNC_FN_NAME
-        ? await dispatch(getState(), event.detail)
-        : dispatch(getState(), event.detail)
+    document.addEventListener(action, async (event) => {
+      const nextState = reducer.constructor.name === ASYNC_FN_NAME
+        ? await reducer(action, getState(), event.detail)
+        : reducer(action, getState(), event.detail)
 
       updateSubscribers(nextState)
     })
