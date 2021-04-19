@@ -48,8 +48,8 @@ export const subscribe = (element, subscribedProperties = []) => {
   subscriptions.push([element, subscribedProperties])
 }
 
-export const create = (defaultState, reducer) => {
-  state = defaultState
+export const create = (initialState, reducer) => {
+  state = initialState
 
   document.addEventListener(REQUEST_STORE_UPDATE, (event) => {
     const {type, payload} = event.detail
