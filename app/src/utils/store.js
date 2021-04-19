@@ -1,6 +1,7 @@
 import get from "lodash/get"
 import cloneDeep from "lodash/cloneDeep"
 
+const ASYNC_FN_NAME = "AsyncFunction"
 const subscriptions = []
 let state = {}
 
@@ -50,8 +51,11 @@ export const create = (defaultState, actions = []) => {
   state = defaultState
 
   for (const action of actions) {
-    document.addEventListener(action.type, async (event) => {
-      const nextState = await action.dispatch(getState(), event.detail)
+    const {type, dispatch} = action
+    document.addEventListener(type, async (event) => {
+      const nextState = dispatch.constructor.name === ASYNC_FN_NAME
+        ? await dispatch(getState(), event.detail)
+        : dispatch(getState(), event.detail)
 
       updateSubscribers(nextState)
     })
