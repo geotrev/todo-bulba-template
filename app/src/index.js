@@ -1,7 +1,4 @@
-import {
-  UpgradedElement,
-  register,
-} from "upgraded-element/lib/upgraded-element.es.js"
+import { UpgradedElement, register } from "upgraded-element"
 import "./store/create-store"
 import "./theme"
 

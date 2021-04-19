@@ -24,5 +24,11 @@
     border-inline-start: none;
     border-inline-end: none;
     background-color: transparent;
+    transition: 0.25s ease;
+
+    &:hover,
+    &:focus {
+      border-block-end-color: var(--color-bistre);
+    }
   }
 }

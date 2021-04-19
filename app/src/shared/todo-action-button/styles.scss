@@ -17,6 +17,8 @@
   transition: 0.25s ease;
   box-sizing: border-box;
   cursor: pointer;
+  outline: none;
+  appearance: none;
 
   $this: &;
 
@@ -57,6 +59,7 @@
   &:focus {
     background: transparent;
     color: var(--color-bistre);
-    border: 0.25rem solid var(--color-bistre);
+    box-shadow: 0px 0px 0px 4px rgba(var(--color-bistre-rgb), 1),
+      0 10px 26px 0px rgba(var(--color-bistre-rgb), 0.4);
   }
 }

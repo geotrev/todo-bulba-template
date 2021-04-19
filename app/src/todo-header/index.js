@@ -1,7 +1,4 @@
-import {
-  UpgradedElement,
-  register,
-} from "upgraded-element/lib/upgraded-element.es.js"
+import { UpgradedElement, register } from "upgraded-element"
 import * as actionTypes from "../store/action-types"
 import { dispatch } from "../utils"
 import "../shared/todo-action-button"
