@@ -10,9 +10,8 @@ class TodoFooter extends UpgradedElement {
     return `
       <footer class="todo-footer">
         <p>
-          Created by&nbsp;
           <a href="https://github.com/geotrev">
-            George Treviranus
+            Created by George Treviranus
           </a>
         </p>
       </footer>

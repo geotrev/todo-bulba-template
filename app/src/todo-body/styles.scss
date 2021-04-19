@@ -1,5 +1,10 @@
 @use "../shared/sass/host";
 
+:host {
+  display: block;
+  overflow: auto;
+}
+
 .todo-body {
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
