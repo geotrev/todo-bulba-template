@@ -1,5 +1,6 @@
 import get from "lodash/get"
 import cloneDeep from "lodash/cloneDeep"
+import {REQUEST_STORE_UPDATE} from "./action-types"
 
 const ASYNC_FN_NAME = "AsyncFunction"
 const subscriptions = []
@@ -50,13 +51,12 @@ export const subscribe = (element, subscribedProperties = []) => {
 export const create = (defaultState, reducer) => {
   state = defaultState
 
-  for (const action of actions) {
-    document.addEventListener(action, async (event) => {
-      const nextState = reducer.constructor.name === ASYNC_FN_NAME
-        ? await reducer(action, getState(), event.detail)
-        : reducer(action, getState(), event.detail)
+  document.addEventListener(REQUEST_STORE_UPDATE, (event) => {
+    const {type, payload} = event.detail
+    const nextState = reducer.constructor.name === ASYNC_FN_NAME
+      ? await reducer(type, getState(), payload)
+      : reducer(type, getState(), payload)
 
-      updateSubscribers(nextState)
-    })
-  }
+    updateSubscribers(nextState)
+  })
 }
