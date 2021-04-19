@@ -60,13 +60,13 @@ class TodoBody extends UpgradedElement {
     const input = todoElement.querySelector(".todo--input")
     input.removeEventListener("input", this.debounceInput)
 
-    dispatch(this, actionTypes.DELETE_TODO, {
+    dispatch(actionTypes.DELETE_TODO, {
       id: event.target.parentElement.id,
     })
   }
 
   handleInput(event) {
-    dispatch(this, actionTypes.SAVE_TODO, {
+    dispatch(actionTypes.SAVE_TODO, {
       id: event.path[0].parentElement.id,
       value: event.path[0].textContent,
     })
