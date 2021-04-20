@@ -1,2 +1,1 @@
-export * as store from "./store"
-export { dispatch } from "./dispatch"
+export { createStore } from "./store
