@@ -9,8 +9,8 @@ const createState = (id, initialState = {}) => {
   Stores[id].state = initialState
 }
 
-const createSubscriptions = (id) => {
-  Stores[id].subscriptions = [] 
+const createSubscribers = (id) => {
+  Stores[id].subscribers = []
 }
 
 const getState = (id) => {
@@ -37,7 +37,7 @@ const updateSubscribers = (id, nextState) => {
 
   setState(id, nextState)
 
-  Stores[id].subscriptions.forEach(([element, properties]) => {
+  Stores[id].subscribers.forEach(([element, properties]) => {
     hydrateElement(id, element, properties)
   })
 }
@@ -54,16 +54,17 @@ const createDispatch = (id, reducer) => {
 }
 
 export const createStore = (initialState, reducer) => {
-  const id = uniqueId('store__')
-  
+  const id = uniqueId("store__")
+
   Stores[id] = {}
-  
+
   createState(id, initialState)
-  createSubscriptions(id)
-  
+  createSubscribers(id)
+
   const dispatch = createDispatch(id, reducer)
 
   return {
+    dispatch,
     subscribe(element, subscribedProperties = []) {
       if (
         !element ||
@@ -74,10 +75,7 @@ export const createStore = (initialState, reducer) => {
       }
 
       hydrateElement(id, element, subscribedProperties)
-      Stores[id].subscriptions.push([element, subscribedProperties])
+      Stores[id].subscribers.push([element, subscribedProperties])
     },
-    dispatch(type, payload) {
-      return dispatch(type, payload)
-    }
   }
 }
