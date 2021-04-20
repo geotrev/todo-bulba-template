@@ -42,7 +42,7 @@ const updateSubscribers = (id, nextState) => {
   })
 }
 
-const createDispatch = (id) => {
+const createDispatch = (id, reducer) => {
   return async (type, payload) => {
     const nextState =
       reducer.constructor.name === ASYNC_FN_NAME
@@ -61,7 +61,7 @@ export const createStore = (initialState, reducer) => {
   createState(id, initialState)
   createSubscriptions(id)
   
-  const dispatch = createDispatch(id)
+  const dispatch = createDispatch(id, reducer)
 
   return {
     subscribe(element, subscribedProperties = []) {
