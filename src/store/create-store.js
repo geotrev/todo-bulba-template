@@ -5,4 +5,6 @@ const initialState = {
   todos: [{ id: "foo-bar", draft: true }],
 }
 
-export createStore(initialState, reducer)
+const { dispatch, subscribe } = createStore(initialState, reducer)
+
+export { dispatch, subscribe }
