@@ -2,9 +2,9 @@ import { UpgradedElement, register } from "upgraded-element"
 import "./store/create-store"
 import "./theme"
 
-import "./todo-header"
-import "./todo-body"
-import "./todo-footer"
+import "./components/todo-header"
+import "./components/todo-body"
+import "./components/todo-footer"
 
 import styles from "./styles.scss"
 

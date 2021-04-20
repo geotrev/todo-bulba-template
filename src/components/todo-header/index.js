@@ -1,7 +1,7 @@
 import { UpgradedElement, register } from "upgraded-element"
-import * as actionTypes from "../store/action-types"
-import { dispatch } from "../utils"
-import "../shared/todo-action-button"
+import * as actionTypes from "../../store/action-types"
+import { dispatch } from "../../utils"
+import "../../shared/todo-action-button"
 import styles from "./styles.scss"
 
 class TodoHeader extends UpgradedElement {
