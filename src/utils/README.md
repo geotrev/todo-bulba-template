@@ -1,6 +1,6 @@
 # Upflux
 
-Global state manager for ES6 classes. Automatically adds data from the store into a corresponding class property.
+Global state manager for ES6 classes. Automatically adds data from the store data into a corresponding class property.
 
 ## Create a store
 
