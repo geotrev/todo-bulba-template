@@ -1,8 +1,7 @@
 import debounce from "lodash-es/debounce"
 import "../../shared/todo-action-button"
 import { UpgradedElement, register } from "upgraded-element"
-import * as actionTypes from "../../store/action-types"
-import { dispatch, store } from "../../utils"
+import { dispatch, subscribe, actionTypes } from "../../store"
 import styles from "./styles.scss"
 
 class TodoBody extends UpgradedElement {
@@ -21,7 +20,6 @@ class TodoBody extends UpgradedElement {
 
   constructor() {
     super()
-    store.subscribe(this, ["todos"])
     this.handleDelete = this.handleDelete.bind(this)
     this.addTodoEvents = this.addTodoEvents.bind(this)
     this.handleInput = this.handleInput.bind(this)
@@ -29,6 +27,7 @@ class TodoBody extends UpgradedElement {
   }
 
   elementDidMount() {
+    subscribe(this, ["todos"])
     this.registerTodos()
   }
 
