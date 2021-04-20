@@ -20,6 +20,7 @@ class TodoBody extends UpgradedElement {
 
   constructor() {
     super()
+    subscribe(this, ["todos"])
     this.handleDelete = this.handleDelete.bind(this)
     this.addTodoEvents = this.addTodoEvents.bind(this)
     this.handleInput = this.handleInput.bind(this)
@@ -27,7 +28,6 @@ class TodoBody extends UpgradedElement {
   }
 
   elementDidMount() {
-    subscribe(this, ["todos"])
     this.registerTodos()
   }
 
