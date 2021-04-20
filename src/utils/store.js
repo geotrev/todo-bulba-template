@@ -1,17 +1,24 @@
 import get from "lodash-es/get"
 import cloneDeep from "lodash-es/cloneDeep"
-import { REQUEST_STORE_UPDATE } from "./action-types"
+import uniqueId from "lodash-es/uniqueId"
 
 const ASYNC_FN_NAME = "AsyncFunction"
-const subscriptions = []
-let state = {}
+const Stores = {}
 
-export const getState = () => {
-  return cloneDeep(state)
+const createState = (id, initialState = {}) => {
+  Stores[id].state = initialState
 }
 
-export const setState = (nextState = {}) => {
-  state = { ...getState(), ...nextState }
+const createSubscriptions = (id) => {
+  Stores[id].subscriptions = [] 
+}
+
+export const getState = (id) => {
+  return cloneDeep(Stores[id].state)
+}
+
+export const setState = (id, nextState = {}) => {
+  Stores[id].state = { ...getState(id), ...nextState }
 }
 
 const getPropName = (path) => {
@@ -19,45 +26,58 @@ const getPropName = (path) => {
   return parts[parts.length - 1]
 }
 
-const hydrateElement = (element, properties) => {
+const hydrateElement = (id, element, properties) => {
   properties.forEach((path) => {
-    element[getPropName(path)] = get(getState(), path)
+    element[getPropName(path)] = get(getState(id), path)
   })
 }
 
-const updateSubscribers = (nextState) => {
-  if (typeof nextState === "undefined") return
+const updateSubscribers = (id, nextState) => {
+  if (!nextState) return
 
-  setState(nextState)
+  setState(id, nextState)
 
-  subscriptions.forEach(([element, subscribedProperties]) => {
-    hydrateElement(element, subscribedProperties)
+  Stores[id].subscriptions.forEach(([element, properties]) => {
+    hydrateElement(id, element, properties)
   })
 }
 
-export const subscribe = (element, subscribedProperties = []) => {
-  if (
-    !element ||
-    !Array.isArray(subscribedProperties) ||
-    !subscribedProperties.length
-  ) {
-    return
-  }
-
-  hydrateElement(element, subscribedProperties)
-  subscriptions.push([element, subscribedProperties])
-}
-
-export const create = (initialState, reducer) => {
-  state = initialState
-
-  document.addEventListener(REQUEST_STORE_UPDATE, async (event) => {
-    const { type, payload } = event.detail
+const createDispatch = (id) => {
+  return (type, payload) => {
     const nextState =
       reducer.constructor.name === ASYNC_FN_NAME
-        ? await reducer(type, getState(), payload)
-        : reducer(type, getState(), payload)
+        ? await reducer(type, getState(id), payload)
+        : reducer(type, getState(id), payload)
 
-    updateSubscribers(nextState)
-  })
+    updateSubscribers(id, nextState)
+  }
+}
+
+export const createStore = async (initialState, reducer) => {
+  const id = uniqueId('store__')
+  
+  Stores[id] = {}
+  
+  createState(id, initialState)
+  createSubscriptions(id)
+  
+  const dispatch = createDispatch(id)
+
+  return {
+    subscribe(element, subscribedProperties = []) {
+      if (
+        !element ||
+        !Array.isArray(subscribedProperties) ||
+        !subscribedProperties.length
+      ) {
+        return
+      }
+
+      hydrateElement(id, element, subscribedProperties)
+      Stores[id].subscriptions.push([element, subscribedProperties])
+    },
+    dispatch(type, payload) {
+      return dispatch(type, payload)
+    }
+  }
 }
