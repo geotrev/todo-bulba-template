@@ -13,11 +13,11 @@ const createSubscriptions = (id) => {
   Stores[id].subscriptions = [] 
 }
 
-export const getState = (id) => {
+const getState = (id) => {
   return cloneDeep(Stores[id].state)
 }
 
-export const setState = (id, nextState = {}) => {
+const setState = (id, nextState = {}) => {
   Stores[id].state = { ...getState(id), ...nextState }
 }
 
