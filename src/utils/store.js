@@ -42,7 +42,7 @@ const updateSubscribers = (id, nextState) => {
   })
 }
 
-const createDispatch = (id) => {
+const createDispatch = async (id) => {
   return (type, payload) => {
     const nextState =
       reducer.constructor.name === ASYNC_FN_NAME
@@ -53,7 +53,7 @@ const createDispatch = (id) => {
   }
 }
 
-export const createStore = async (initialState, reducer) => {
+export const createStore = (initialState, reducer) => {
   const id = uniqueId('store__')
   
   Stores[id] = {}
