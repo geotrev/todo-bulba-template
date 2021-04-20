@@ -1,6 +1,5 @@
 import { UpgradedElement, register } from "upgraded-element"
-import * as actionTypes from "../../store/action-types"
-import { dispatch } from "../../utils"
+import { dispatch, actionTypes } from "../../store"
 import "../../shared/todo-action-button"
 import styles from "./styles.scss"
 
