@@ -1,7 +1,7 @@
 import debounce from "lodash-es/debounce"
-import "../../shared/todo-action-button"
 import { UpgradedElement, register } from "upgraded-element"
 import { dispatch, subscribe, actionTypes } from "../../store"
+import "../../shared/todo-action-button"
 import styles from "./styles.scss"
 
 class TodoBody extends UpgradedElement {
