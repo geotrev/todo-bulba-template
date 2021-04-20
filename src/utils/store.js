@@ -42,8 +42,8 @@ const updateSubscribers = (id, nextState) => {
   })
 }
 
-const createDispatch = async (id) => {
-  return (type, payload) => {
+const createDispatch = (id) => {
+  return async (type, payload) => {
     const nextState =
       reducer.constructor.name === ASYNC_FN_NAME
         ? await reducer(type, getState(id), payload)
