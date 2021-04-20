@@ -1,4 +1,4 @@
-import {REQUEST_STORE_UPDATE} from "./action-types"
+import { REQUEST_STORE_UPDATE } from "./action-types"
 
 export const dispatch = (type, payload = {}) => {
   const event = new CustomEvent(REQUEST_STORE_UPDATE, {

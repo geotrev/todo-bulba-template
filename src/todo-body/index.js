@@ -1,4 +1,4 @@
-import debounce from "lodash/debounce"
+import debounce from "lodash-es/debounce"
 import "../shared/todo-action-button"
 import { UpgradedElement, register } from "upgraded-element"
 import * as actionTypes from "../store/action-types"

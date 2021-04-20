@@ -2,4 +2,4 @@
 npm-error.log*
 
 node_modules/
-app/public/bundle.js
+public/bundle.js

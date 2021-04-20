@@ -1,5 +1,4 @@
 import { store } from "../utils"
-import * as actionTypes from "./action-types"
 import { reducer } from "./reducer"
 
 const initialState = {
