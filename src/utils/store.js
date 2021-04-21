@@ -42,17 +42,6 @@ const updateSubscribers = (id, nextState) => {
   })
 }
 
-const createDispatch = (id, reducer) => {
-  return async (type, payload) => {
-    const nextState =
-      reducer.constructor.name === ASYNC_FN_NAME
-        ? await reducer(type, getState(id), payload)
-        : reducer(type, getState(id), payload)
-
-    updateSubscribers(id, nextState)
-  }
-}
-
 export const createStore = (initialState, reducer) => {
   const id = uniqueId("store__")
 
@@ -61,10 +50,15 @@ export const createStore = (initialState, reducer) => {
   createState(id, initialState)
   createSubscribers(id)
 
-  const dispatch = createDispatch(id, reducer)
-
   return {
-    dispatch,
+    dispatch: async (type, payload) => {
+      const nextState =
+        reducer.constructor.name === ASYNC_FN_NAME
+          ? await reducer(type, getState(id), payload)
+          : reducer(type, getState(id), payload)
+
+      updateSubscribers(id, nextState)
+    },
     subscribe(element, subscribedProperties = []) {
       if (
         !element ||
