@@ -1,9 +1,11 @@
 import get from "lodash-es/get"
 import cloneDeep from "lodash-es/cloneDeep"
-import uniqueId from "lodash-es/uniqueId"
 
 const ASYNC_FN_NAME = "AsyncFunction"
 const Stores = {}
+let idValue = 0
+
+const createId = () => idValue + 1
 
 const createState = (id, initialState = {}) => {
   Stores[id].state = initialState
@@ -26,9 +28,9 @@ const getPropName = (path) => {
   return parts[parts.length - 1]
 }
 
-const hydrateElement = (id, element, properties) => {
+const updateSubscriber = (id, subscriber, properties) => {
   properties.forEach((path) => {
-    element[getPropName(path)] = get(getState(id), path)
+    subscriber[getPropName(path)] = get(getState(id), path)
   })
 }
 
@@ -37,13 +39,13 @@ const updateSubscribers = (id, nextState) => {
 
   setState(id, nextState)
 
-  Stores[id].subscribers.forEach(([element, properties]) => {
-    hydrateElement(id, element, properties)
+  Stores[id].subscribers.forEach(([subscriber, properties]) => {
+    updateSubscriber(id, subscriber, properties)
   })
 }
 
 export const createStore = (initialState, reducer) => {
-  const id = uniqueId("store__")
+  const id = createId()
 
   Stores[id] = {}
 
@@ -59,17 +61,17 @@ export const createStore = (initialState, reducer) => {
 
       updateSubscribers(id, nextState)
     },
-    subscribe(element, subscribedProperties = []) {
+    subscribe(subscriber, subscribedProperties = []) {
       if (
-        !element ||
+        !subscriber ||
         !Array.isArray(subscribedProperties) ||
         !subscribedProperties.length
       ) {
         return
       }
 
-      hydrateElement(id, element, subscribedProperties)
-      Stores[id].subscribers.push([element, subscribedProperties])
+      updateSubscriber(id, subscriber, subscribedProperties)
+      Stores[id].subscribers.push([subscriber, subscribedProperties])
     },
   }
 }
