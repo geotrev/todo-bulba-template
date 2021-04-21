@@ -1,39 +1,60 @@
-# Upflux
+# Core Flux
 
-Global state manager for ES6 classes. Automatically adds data from the store data into a corresponding class property.
+Shared state manager for ES6 classes and/or constructor functions using the Flux pattern.
+
+1. **Subscribe** to properties in the store
+2. **Dispatch** new state payloads
+3. **Receive** new state as a property
 
 ## Create a store
 
-To create a store, provide your initial state object and a reducer containing your action logic.
+Import and call `createStore` to initialize a new store instance (you can have multiple if you want). All that's required is the default **initial state object** and a [**reducer function**](#write-a-reducer).
 
 ```js
-import { store } from "./utils"
-import { reducer } from "./reducer"
+import { createStore } from "core-flux"
+import { reducer } from "./my-reducer"
 
 const initialState = {
   foo: [],
-  bar: 0
+  bar: {
+    baz: 0,
+    beep: "hello",
+  },
 }
 
-store.create(initialState, reducer)
+const { subscribe, dispatch } = createStore(initialState, reducer)
+
+export { subscribe, dispatch }
 ```
+
+The result of `createStore` will be helpers used to interact with the store.
+
+- `dispatch` - used to update state with an accompanying action.
+- `subscribe` - used to subscribe a class or prototype to the store.
 
 ## Write a reducer
 
-Reducers here are like other flux implementation: a pure function that returns new state. Use your own action types to direct state change logic.
+Reducers in Core Flux are like other flux implementation: a pure function that returns new state, using custom action types to direct state-changing logic.
+
+The state object passed in is a copy, so you can safely mutate it to your heart's desire.
 
 ```js
-import actionTypes from "./action-types"
+import actionTypes from "./my-action-types"
 
 export const reducer = (type, state, payload) => {
   switch (type) {
+    // 'ADD_ONE'
     case actionTypes.ADD_ONE: {
-      return { ...state, bar: state.bar + 1 }
+      state.bar.baz += 1
+      return state
     }
+
+    // 'MORE_FOO'
     case actionTypes.MORE_FOO: {
-      const foo = foo.concat(payload.foo)
-      return { ...state, foo }
+      state.foo.concat(payload.foo)
+      return state
     }
+
     default: {
       return state
     }
@@ -42,33 +63,48 @@ export const reducer = (type, state, payload) => {
 ```
 
 Params:
+
 - `type`: The name of the dispatched action.
 - `state`: An immutable copy of current state.
 - `payload`: Payload given from the dispatched action.
 
-## Subscribe to the store
-
-Subscribing is a single call. It takes the `this` of your class and an array of paths to properties in the store.
-
-```js
-store.subscribe(this, ["foo", "some.nested[0].propName"])
-```
-
-Whenever these state values change, the values are automatically forwarded to your class as matching properties to the inner-most property name.
-
-To use the above example, `propName` and `foo` would be the properties updated on your subscribed class.
-
 ## Dispatch an action
 
-All that's left is dispatching the action.
+Provide an **action type** and the **payload object** which reflects a piece of state to be handled in your reducer.
 
 ```js
-import { dispatch } from "./utils"
-import actionTypes from "./action-types"
+import { dispatch } from "./my-store"
+import actionTypes from "./my-action-types"
 
 dispatch(actionTypes.ADD_MORE_FOO, {
-  foo: [{ id: 'baz', value: 'beep' }],
+  foo: [{ id: "baz", value: "beep" }],
 })
 
 dispatch(actionTypes.ADD_ONE)
 ```
+
+## Subscribe to the store
+
+Last but not least, to subscribe to a store, provide the class or function instance (`this` for either a class or constructor function) and an **array of paths** to properties in the store.
+
+```js
+import { subscribe } from "./my-store"
+
+// Class
+class FooBar {
+  constructor() {
+    subscribe(this, ["foo", "some.bar.beep"])
+  }
+
+  get myBeep() {
+    return this.beep
+  }
+}
+
+// Constructor function
+const FooBar() {
+  subscribe(this, ["foo", "some.bar.beep"])
+}
+```
+
+**Whenever these state properties change, the values are automatically forwarded to your class as matching properties.** To use the above example, `foo` and `beep` would be the properties updated on your class.
