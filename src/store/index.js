@@ -1,2 +1,2 @@
-export { dispatch, subscribe } from "./create-store"
+export { dispatch, subscribe } from "./store"
 export * as actionTypes from "./action-types"
