@@ -1,4 +1,4 @@
-import { createStore } from "../utils"
+import { createStore } from "core-flux"
 import { reducer } from "./reducer"
 
 const initialState = {
