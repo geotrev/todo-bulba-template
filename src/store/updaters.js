@@ -26,6 +26,8 @@ function updateSubscriber([subscriber, paths], state) {
  * @param {Object} nextState
  */
 function stateUpdated(subscriptions, nextState, setState) {
+  if (!nextState) return
+
   setState(nextState)
 
   forEach(subscriptions, function (subscription) {
@@ -34,6 +36,6 @@ function stateUpdated(subscriptions, nextState, setState) {
 }
 
 export default {
-  subscriptionAdded: updateSubscriber,
+  subscriptionsUpdated: updateSubscriber,
   stateUpdated,
 }

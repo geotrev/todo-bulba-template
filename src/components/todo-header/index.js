@@ -1,5 +1,5 @@
 import { UpgradedElement, register } from "upgraded-element"
-import { dispatch, actionTypes } from "../../store"
+import { dispatch, actions } from "../../store"
 import "../../shared/todo-action-button"
 import styles from "./styles.scss"
 
@@ -23,7 +23,7 @@ class TodoHeader extends UpgradedElement {
   }
 
   handleClick() {
-    dispatch(actionTypes.ADD_TODO)
+    dispatch(actions.ADD_TODO)
   }
 
   render() {

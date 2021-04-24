@@ -1,6 +1,6 @@
 import debounce from "lodash-es/debounce"
 import { UpgradedElement, register } from "upgraded-element"
-import { dispatch, subscribe, actionTypes } from "../../store"
+import { dispatch, subscribe, actions } from "../../store"
 import "../../shared/todo-action-button"
 import styles from "./styles.scss"
 
@@ -59,13 +59,13 @@ class TodoBody extends UpgradedElement {
     const input = todoElement.querySelector(".todo--input")
     input.removeEventListener("input", this.debounceInput)
 
-    dispatch(actionTypes.DELETE_TODO, {
+    dispatch(actions.DELETE_TODO, {
       id: event.target.parentElement.id,
     })
   }
 
   handleInput(event) {
-    dispatch(actionTypes.SAVE_TODO, {
+    dispatch(actions.SAVE_TODO, {
       id: event.path[0].parentElement.id,
       value: event.path[0].textContent,
     })

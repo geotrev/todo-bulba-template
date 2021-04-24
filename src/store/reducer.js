@@ -1,18 +1,18 @@
 import { v4 as uid } from "uuid"
-import * as actionTypes from "./action-types"
+import * as actions from "./actions"
 
 export function reducer(type, state, payload) {
   const { todos } = state
 
   switch (type) {
-    case actionTypes.ADD_TODO: {
+    case actions.ADD_TODO: {
       const activeTodo = todos[0]
       if (activeTodo && activeTodo.draft) return
 
       todos.unshift({ id: uid(), value: "", draft: true })
       return { todos }
     }
-    case actionTypes.SAVE_TODO: {
+    case actions.SAVE_TODO: {
       const index = todos.findIndex((todo) => todo.id === payload.id)
 
       if (index === -1) {
@@ -28,7 +28,7 @@ export function reducer(type, state, payload) {
       todos[index].value = payload.value
       return { todos }
     }
-    case actionTypes.DELETE_TODO: {
+    case actions.DELETE_TODO: {
       const index = todos.findIndex((item) => item.id === payload.id)
 
       if (index === -1) {
