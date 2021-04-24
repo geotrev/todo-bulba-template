@@ -1,7 +1,7 @@
 import { v4 as uid } from "uuid"
 import * as actionTypes from "./action-types"
 
-export const reducer = (type, state, payload) => {
+export function reducer(type, state, payload) {
   const { todos } = state
 
   switch (type) {
