@@ -35,7 +35,9 @@ class TodoBody extends UpgradedElement {
     const newTodo = this.todos[0]
 
     if (newTodo && newTodo.draft) {
-      this.addTodoEvents(this.shadowRoot.querySelector(".todo"))
+      const todo = this.shadowRoot.querySelector(".todo")
+      this.addTodoEvents(todo)
+      todo.querySelector(".todo--input").focus()
     }
   }
 
@@ -75,6 +77,7 @@ class TodoBody extends UpgradedElement {
     if (!this.todos.length) {
       return `
         <p>You're done! Rejoice! :)</p>
+        <br/>
         <p>Or... create more todos!</p>
       `
     }

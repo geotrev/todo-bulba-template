@@ -5,18 +5,18 @@
 }
 
 :root {
-  --color-pewter: #9cafb7;
-  --color-pewter-rgb: #{hex-to-rgb(#9cafb7)};
+  --color-bistre-rgb: #{hex-to-rgb(#f05d5e)};
+  --color-bistre: #f05d5e;
 
-  --color-peach: #f7dba7;
-  --color-peach-rgb: #{hex-to-rgb(#f7dba7)};
+  --color-copper-rgb: #{hex-to-rgb(#0f7173)};
+  --color-copper: #0f7173;
 
-  --color-tumbleweed: #f1ab86;
-  --color-tumbleweed-rgb: #{hex-to-rgb(#f1ab86)};
+  --color-peach-rgb: #{hex-to-rgb(#e7ecef)};
+  --color-peach: #e7ecef;
 
-  --color-copper: #c57b57;
-  --color-copper-rgb: #{hex-to-rgb(#c57b57)};
+  --color-pewter-rgb: #{hex-to-rgb(#272932)};
+  --color-pewter: #272932;
 
-  --color-bistre: #251605;
-  --color-bistre-rgb: #{hex-to-rgb(#251605)};
+  --color-tumbleweed-rgb: #{hex-to-rgb(#fdceab)};
+  --color-tumbleweed: #fdceab;
 }

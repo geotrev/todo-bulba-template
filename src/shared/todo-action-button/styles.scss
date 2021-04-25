@@ -8,11 +8,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--color-copper);
+  color: var(--color-peach);
   font-weight: 600;
   font-family: "Courier New", Courier, monospace;
   border: none;
-  background-color: var(--color-bistre);
+  background-color: var(--color-pewter);
   border: 0.25rem solid transparent;
   transition: 0.25s ease;
   box-sizing: border-box;
@@ -58,7 +58,7 @@
   &:hover,
   &:focus {
     background: transparent;
-    color: var(--color-bistre);
-    border: 0.25rem solid var(--color-bistre);
+    color: var(--color-pewter);
+    border: 0.25rem solid var(--color-pewter);
   }
 }
