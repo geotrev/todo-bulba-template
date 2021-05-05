@@ -1,5 +1,5 @@
 import get from "lodash-es/get"
-import forEach from "lodash/forEach"
+import forEach from "lodash-es/forEach"
 
 /**
  * Derives a new name for a subscriber's property by
