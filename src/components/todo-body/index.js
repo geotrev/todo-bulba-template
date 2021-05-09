@@ -20,66 +20,68 @@ class TodoBody extends UpgradedElement {
 
   constructor() {
     super()
-    this.handleDelete = this.handleDelete.bind(this)
-    this.addTodoEvents = this.addTodoEvents.bind(this)
+    this.handleClick = this.handleClick.bind(this)
     this.handleInput = this.handleInput.bind(this)
-    this.debounceInput = debounce(this.handleInput, 500)
+    this.handleDebouncedInput = this.handleDebouncedInput.bind(this)
+    this.debounceInput = debounce(this.handleDebouncedInput, 500)
   }
 
   elementDidMount() {
     subscribe(this, ["todos"])
-    this.registerTodos()
+    this.addEventListener("click", this.handleClick)
+    this.addEventListener("input", this.handleInput)
+  }
+
+  elementWillUnmount() {
+    this.removeEventListener("click", this.handleClick)
+    this.removeEventListener("input", this.handleInput)
   }
 
   elementDidUpdate() {
-    const newTodo = this.todos[0]
+    const topTodo = this.todos[0]
 
-    if (newTodo && newTodo.draft) {
-      const todo = this.shadowRoot.querySelector(".todo")
-      this.addTodoEvents(todo)
-      todo.querySelector(".todo--input").focus()
+    if (topTodo && topTodo.draft) {
+      const todoEl = this.shadowRoot.querySelector(".todo")
+      todoEl.querySelector(".todo--input").focus()
     }
   }
 
-  registerTodos() {
-    const todos = this.shadowRoot.querySelectorAll(".todo")
-    todos.forEach(this.addTodoEvents)
+  handleClick(event) {
+    const path = event.composedPath()
+
+    const deleteBtn = path.find(
+      (element) => element.tagName && element.tagName === "TODO-ACTION-BUTTON"
+    )
+
+    if (deleteBtn) {
+      dispatch(actions.DELETE_TODO, { id: deleteBtn.parentElement.id })
+    }
   }
 
-  addTodoEvents(todoElement) {
-    const deleteBtn = todoElement.querySelector("todo-action-button")
-    const input = todoElement.querySelector(".todo--input")
-    deleteBtn.addEventListener("click", this.handleDelete)
-    input.addEventListener("input", this.debounceInput)
-  }
+  handleDebouncedInput(source) {
+    if (!source.classList.contains("todo--input")) return
 
-  handleDelete(event) {
-    const todoElement = event.target.parentElement
-
-    const deleteBtn = todoElement.querySelector("todo-action-button")
-    deleteBtn.removeEventListener("click", this.handleDelete)
-    const input = todoElement.querySelector(".todo--input")
-    input.removeEventListener("input", this.debounceInput)
-
-    dispatch(actions.DELETE_TODO, {
-      id: event.target.parentElement.id,
+    dispatch(actions.SAVE_TODO, {
+      id: source.parentElement.id,
+      value: source.textContent,
     })
   }
 
   handleInput(event) {
-    dispatch(actions.SAVE_TODO, {
-      id: event.path[0].parentElement.id,
-      value: event.path[0].textContent,
-    })
+    this.debounceInput(event.composedPath()[0])
+  }
+
+  renderEmptyState() {
+    return `
+      <p>You're done! Rejoice! :)</p>
+      <br/>
+      <p>Or... create more todos!</p>
+    `
   }
 
   renderTodos() {
     if (!this.todos.length) {
-      return `
-        <p>You're done! Rejoice! :)</p>
-        <br/>
-        <p>Or... create more todos!</p>
-      `
+      return this.renderEmptyState()
     }
 
     return this.todos.reduce((todos, todo) => {
