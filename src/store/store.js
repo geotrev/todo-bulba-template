@@ -1,4 +1,4 @@
-import { createStore } from "core-flux/lib/core-flux.es.js"
+import { createStore } from "core-flux"
 import { reducer } from "./reducer"
 import bindings from "./bindings"
 
