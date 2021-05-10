@@ -1,8 +1,8 @@
 import { createStore } from "core-flux/lib/core-flux.es.js"
 import { reducer } from "./reducer"
-import updaters from "./updaters"
+import bindings from "./bindings"
 
-const { subscriptionsUpdated, stateUpdated } = updaters
+const { bindSubscriber, bindState } = bindings
 
 const state = {
   todos: [{ id: "foo-bar", draft: true }],
@@ -11,8 +11,8 @@ const state = {
 const { dispatch, subscribe } = createStore(
   state,
   reducer,
-  subscriptionsUpdated,
-  stateUpdated
+  bindSubscriber,
+  bindState
 )
 
 export { dispatch, subscribe }
