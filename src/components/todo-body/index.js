@@ -86,8 +86,8 @@ class TodoBody extends UpgradedElement {
 
     return this.todos.reduce((todos, todo) => {
       todos += `
-        <div class="todo" data-key='${todo.id}' id='${todo.id}'>
-          <div class="todo--input" contenteditable="true"></div>
+        <div class="todo" data-key="${todo.id}" id="${todo.id}">
+          <div class="todo--input" contenteditable="true" tabindex="0"></div>
           <todo-action-button icon="–">Delete</todo-action-button>
         </div>
       `
