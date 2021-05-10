@@ -12,7 +12,7 @@ function getPropName(path) {
   return parts[parts.length - 1]
 }
 
-function updateSubscriber([subscriber, paths], state) {
+function bindSubscriber([subscriber, paths], state) {
   forEach(paths, function (path) {
     subscriber[getPropName(path)] = get(state, path)
   })
@@ -25,17 +25,17 @@ function updateSubscriber([subscriber, paths], state) {
  * @param {string} id
  * @param {Object} nextState
  */
-function stateUpdated(subscriptions, nextState, setState) {
+function bindState(subscriptions, nextState, setState) {
   if (!nextState) return
 
   setState(nextState)
 
   forEach(subscriptions, function (subscription) {
-    updateSubscriber(subscription, nextState)
+    bindSubscriber(subscription, nextState)
   })
 }
 
 export default {
-  subscriptionsUpdated: updateSubscriber,
-  stateUpdated,
+  bindSubscriber,
+  bindState,
 }
