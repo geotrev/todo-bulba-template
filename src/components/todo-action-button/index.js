@@ -1,7 +1,7 @@
-import { UpgradedElement, register } from "upgraded-element"
+import { Rotom, register } from "rotom"
 import styles from "./styles.scss"
 
-class TodoActionButton extends UpgradedElement {
+class TodoActionButton extends Rotom {
   static get styles() {
     return styles
   }

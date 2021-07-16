@@ -1,9 +1,9 @@
-import { UpgradedElement, register } from "upgraded-element"
+import { Rotom, register } from "rotom"
 import { dispatch, actions } from "../../store"
-import "../../shared/todo-action-button"
+import "../todo-action-button"
 import styles from "./styles.scss"
 
-class TodoHeader extends UpgradedElement {
+class TodoHeader extends Rotom {
   static get styles() {
     return styles
   }

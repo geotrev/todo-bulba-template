@@ -1,10 +1,10 @@
 import debounce from "lodash-es/debounce"
-import { UpgradedElement, register } from "upgraded-element"
+import { Rotom, register } from "rotom"
 import { dispatch, subscribe, actions } from "../../store"
-import "../../shared/todo-action-button"
+import "../todo-action-button"
 import styles from "./styles.scss"
 
-class TodoBody extends UpgradedElement {
+class TodoBody extends Rotom {
   static get properties() {
     return {
       todos: {
@@ -20,6 +20,7 @@ class TodoBody extends UpgradedElement {
 
   constructor() {
     super()
+    subscribe(this, ["todos"])
     this.handleClick = this.handleClick.bind(this)
     this.handleInput = this.handleInput.bind(this)
     this.handleDebouncedInput = this.handleDebouncedInput.bind(this)
@@ -27,7 +28,6 @@ class TodoBody extends UpgradedElement {
   }
 
   elementDidMount() {
-    subscribe(this, ["todos"])
     this.addEventListener("click", this.handleClick)
     this.addEventListener("input", this.handleInput)
   }
@@ -38,6 +38,10 @@ class TodoBody extends UpgradedElement {
   }
 
   elementDidUpdate() {
+    this.focusDraftTodo()
+  }
+
+  focusDraftTodo() {
     const topTodo = this.todos[0]
 
     if (topTodo && topTodo.draft) {

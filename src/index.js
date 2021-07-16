@@ -1,4 +1,4 @@
-import { UpgradedElement, register } from "upgraded-element"
+import { Rotom, register } from "rotom"
 import "./theme"
 
 import "./components/todo-header"
@@ -9,7 +9,7 @@ import styles from "./styles.scss"
 
 // define the app
 
-class TodoApp extends UpgradedElement {
+class TodoApp extends Rotom {
   static get styles() {
     return styles
   }
