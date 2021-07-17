@@ -32,7 +32,13 @@ class TodoHeader extends Rotom {
         <h1 class="todo-header--heading">
           <span aria-hidden="true">/</span>TooDoo
         </h1>
-        <todo-action-button icon="+" size="lg">Add Todo</todo-action-button>
+        <todo-action-button 
+          class="todo-header-action-button" 
+          icon="+" 
+          size="lg"
+        >
+          Add Todo
+        </todo-action-button>
       </header>
     `
   }

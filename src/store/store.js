@@ -1,3 +1,4 @@
+import { v4 as uid } from "uuid"
 import { createStore } from "core-flux"
 import { reducer } from "./reducer"
 import bindings from "./bindings"
@@ -5,7 +6,7 @@ import bindings from "./bindings"
 const { bindSubscriber, bindState } = bindings
 
 const state = {
-  todos: [{ id: "foo-bar", draft: true }],
+  todos: [{ id: uid(), draft: true }],
 }
 
 const { dispatch, subscribe, __data } = createStore(

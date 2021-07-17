@@ -92,7 +92,12 @@ class TodoBody extends Rotom {
       todos += `
         <div class="todo" data-key="${todo.id}" id="${todo.id}">
           <div class="todo--input" contenteditable="true" tabindex="0"></div>
-          <todo-action-button icon="–">Delete</todo-action-button>
+          <todo-action-button 
+            class="todo-body-action-button"
+            icon="–"
+          >
+            Delete
+          </todo-action-button>
         </div>
       `
       return todos
