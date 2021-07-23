@@ -13,12 +13,12 @@ class TodoHeader extends Rotom {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  elementDidMount() {
+  onMount() {
     this.button = this.shadowRoot.querySelector("todo-action-button")
     this.button.addEventListener("click", this.handleClick)
   }
 
-  elementWillUnmount() {
+  onUnmount() {
     this.button.removeEventListener("click", this.handleClick)
   }
 

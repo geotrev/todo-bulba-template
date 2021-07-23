@@ -27,17 +27,17 @@ class TodoBody extends Rotom {
     this.debounceInput = debounce(this.handleDebouncedInput, 500)
   }
 
-  elementDidMount() {
+  onMount() {
     this.addEventListener("click", this.handleClick)
     this.addEventListener("input", this.handleInput)
   }
 
-  elementWillUnmount() {
+  onUnmount() {
     this.removeEventListener("click", this.handleClick)
     this.removeEventListener("input", this.handleInput)
   }
 
-  elementDidUpdate() {
+  onUpdate() {
     this.focusDraftTodo()
   }
 
