@@ -1,5 +1,6 @@
 import { v4 as uid } from "uuid"
 import * as actions from "./actions"
+import { getRandomizedPlaceholder } from "../generate-placeholder"
 
 export function reducer(state, { type, payload }) {
   const { todos } = state
@@ -9,7 +10,12 @@ export function reducer(state, { type, payload }) {
       const activeTodo = todos[0]
       if (activeTodo && activeTodo.draft) return
 
-      todos.unshift({ id: uid(), value: "", draft: true })
+      todos.unshift({
+        id: uid(),
+        value: "",
+        placeholder: getRandomizedPlaceholder(),
+        draft: true,
+      })
       return { todos }
     }
     case actions.SAVE_TODO: {

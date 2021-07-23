@@ -67,7 +67,7 @@ class TodoBody extends Rotom {
 
     dispatch(actions.SAVE_TODO, {
       id: source.parentElement.id,
-      value: source.textContent,
+      value: source.value,
     })
   }
 
@@ -91,7 +91,7 @@ class TodoBody extends Rotom {
     return this.todos.reduce((todos, todo) => {
       todos += `
         <div class="todo" data-key="${todo.id}" id="${todo.id}">
-          <div class="todo--input" contenteditable="true" tabindex="0"></div>
+          <input class="todo--input" placeholder="${todo.placeholder}" />
           <todo-action-button 
             class="todo-body-action-button"
             icon="–"
