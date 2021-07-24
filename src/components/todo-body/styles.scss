@@ -12,22 +12,22 @@
 
 .todo {
   display: flex;
+  align-content: flex-end;
   align-items: flex-end;
-  align-content: stretch;
-  align-items: stretch;
   padding-block-end: 0.25rem;
   margin-block-end: 1.5rem;
 
-  &--input {
+  &--textarea {
     display: flex;
     flex-wrap: wrap;
+    flex: 1;
     overflow-wrap: anywhere;
     align-items: center;
     color: var(--color-pewter);
     font-family: inherit;
-    font-size: 2rem;
+    font-size: 1.25rem;
     min-width: 9rem;
-    max-width: 100%;
+    max-width: 32rem;
     outline: none;
     margin-inline-end: 1rem;
     border-block-start: none;

@@ -46,7 +46,7 @@ class TodoBody extends Rotom {
 
     if (topTodo && topTodo.draft) {
       const todoEl = this.shadowRoot.querySelector(".todo")
-      todoEl.querySelector(".todo--input").focus()
+      todoEl.querySelector(".todo--textarea").focus()
     }
   }
 
@@ -63,7 +63,7 @@ class TodoBody extends Rotom {
   }
 
   handleDebouncedInput(source) {
-    if (!source.classList.contains("todo--input")) return
+    if (!source.classList.contains("todo--textarea")) return
 
     dispatch(actions.SAVE_TODO, {
       id: source.parentElement.id,
@@ -91,7 +91,9 @@ class TodoBody extends Rotom {
     return this.todos.reduce((todos, todo) => {
       todos += `
         <div class="todo" data-key="${todo.id}" id="${todo.id}">
-          <input class="todo--input" placeholder="${todo.placeholder}" />
+          <textarea class="todo--textarea" placeholder="${todo.placeholder}">
+            ${todo.value}
+          </textarea>
           <todo-action-button 
             class="todo-body-action-button"
             icon="–"
