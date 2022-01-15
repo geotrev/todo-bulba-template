@@ -23,7 +23,7 @@ export function reducer(state, { type, payload }) {
 
       if (index === -1) {
         // eslint-disable-next-line no-console
-        console.error(`[TODO]: Couldn't find todo with id ${payload.id}.`)
+        console.error(`[TODO]: Couldn't find todo with id '${payload.id}'.`)
         return state
       }
 
@@ -39,7 +39,7 @@ export function reducer(state, { type, payload }) {
 
       if (index === -1) {
         // eslint-disable-next-line no-console
-        console.error(`[TODO]: Couldn't find todo with id ${payload.id}.`)
+        console.error(`[TODO]: Couldn't find todo with id '${payload.id}'.`)
         return state
       }
 

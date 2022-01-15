@@ -12,6 +12,7 @@ const { dispatch, subscribe, __data } = createStore(
   bindState
 )
 
-window.__store__ = __data
+// Show state
+window.__CORE_FLUX_STATE__ = __data
 
 export { dispatch, subscribe }

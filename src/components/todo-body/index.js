@@ -1,10 +1,10 @@
 import debounce from "lodash-es/debounce"
-import { Rotom, register } from "rotom"
+import { RotomElement, register } from "rotom"
 import { dispatch, subscribe, actions } from "../../store"
 import "../todo-action-button"
 import styles from "./styles.scss"
 
-class TodoBody extends Rotom {
+class TodoBody extends RotomElement {
   static get properties() {
     return {
       todos: {

@@ -1,9 +1,9 @@
-import { Rotom, register } from "rotom"
+import { RotomElement, register } from "rotom"
 import { dispatch, actions } from "../../store"
 import "../todo-action-button"
 import styles from "./styles.scss"
 
-class TodoHeader extends Rotom {
+class TodoHeader extends RotomElement {
   static get styles() {
     return styles
   }

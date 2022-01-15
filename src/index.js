@@ -1,4 +1,4 @@
-import { Rotom, register } from "rotom"
+import { RotomElement, register } from "rotom"
 import "./theme"
 
 import "./components/todo-header"
@@ -9,7 +9,7 @@ import styles from "./styles.scss"
 
 // define the app
 
-class TodoApp extends Rotom {
+class TodoApp extends RotomElement {
   static get styles() {
     return styles
   }

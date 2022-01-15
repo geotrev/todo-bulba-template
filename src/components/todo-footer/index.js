@@ -1,7 +1,7 @@
-import { Rotom, register } from "rotom"
+import { RotomElement, register } from "rotom"
 import styles from "./styles.scss"
 
-class TodoFooter extends Rotom {
+class TodoFooter extends RotomElement {
   static get styles() {
     return styles
   }
