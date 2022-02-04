@@ -1,9 +1,8 @@
 import { RotomElement, register } from "rotom"
-import "./theme"
-
 import "./components/todo-header"
 import "./components/todo-body"
 import "./components/todo-footer"
+import "./theme"
 
 import styles from "./styles.scss"
 
