@@ -1,7 +1,8 @@
-import { RotomElement, register } from "rotom"
+import { BulbaElement, register } from "@bulba/element"
+import { Renderer } from "@bulba/template"
 import styles from "./styles.scss"
 
-class TodoActionButton extends RotomElement {
+class TodoActionButton extends BulbaElement(Renderer) {
   static get properties() {
     return {
       icon: {
