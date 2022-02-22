@@ -1,5 +1,5 @@
 # Toodoo
 
-[Make todos.](https://todo-rotom.netlify.app)
+[Make todos.](https://todo-bulba.netlify.app)
 
-A simple todo app built with [Rotom](https://github.com/geotrev/rotom) components and [Core Flux](https://github.com/geotrev/core-flux) state manager.
+A simple todo app built with [Bulba](https://github.com/geotrev/bulba) components and [Core Flux](https://github.com/geotrev/core-flux) state manager.

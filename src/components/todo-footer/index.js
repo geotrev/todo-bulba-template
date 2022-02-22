@@ -1,7 +1,8 @@
-import { RotomElement, register } from "rotom"
+import { BulbaElement, register } from "@bulba/element"
+import { Renderer } from "@bulba/template"
 import styles from "./styles.scss"
 
-class TodoFooter extends RotomElement {
+class TodoFooter extends BulbaElement(Renderer) {
   static get styles() {
     return styles
   }

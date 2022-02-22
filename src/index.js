@@ -1,4 +1,5 @@
-import { RotomElement, register } from "rotom"
+import { BulbaElement, register } from "@bulba/element"
+import { Renderer } from "@bulba/template"
 import "./components/todo-header"
 import "./components/todo-body"
 import "./components/todo-footer"
@@ -8,7 +9,7 @@ import styles from "./styles.scss"
 
 // define the app
 
-class TodoApp extends RotomElement {
+class TodoApp extends BulbaElement(Renderer) {
   static get styles() {
     return styles
   }

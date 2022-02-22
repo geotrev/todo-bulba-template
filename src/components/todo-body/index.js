@@ -1,10 +1,11 @@
 import debounce from "lodash-es/debounce"
-import { RotomElement, register } from "rotom"
+import { BulbaElement, register } from "@bulba/element"
+import { Renderer } from "@bulba/template"
 import { dispatch, subscribe, actions } from "../../store"
 import "../todo-action-button"
 import styles from "./styles.scss"
 
-class TodoBody extends RotomElement {
+class TodoBody extends BulbaElement(Renderer) {
   static get properties() {
     return {
       todos: {
@@ -23,8 +24,7 @@ class TodoBody extends RotomElement {
     subscribe(this, ["todos"])
     this.handleClick = this.handleClick.bind(this)
     this.handleInput = this.handleInput.bind(this)
-    this.handleDebouncedInput = this.handleDebouncedInput.bind(this)
-    this.debounceInput = debounce(this.handleDebouncedInput, 500)
+    this.debounceInput = debounce(this.handleInput, 500)
   }
 
   onMount() {
@@ -62,17 +62,15 @@ class TodoBody extends RotomElement {
     }
   }
 
-  handleDebouncedInput(source) {
-    if (!source.classList.contains("todo--textarea")) return
+  handleInput(event) {
+    const target = event.composedPath()[0]
+
+    if (!target.classList.contains("todo--textarea")) return
 
     dispatch(actions.SAVE_TODO, {
-      id: source.parentElement.id,
-      value: source.value,
+      id: target.parentElement.id,
+      value: target.value,
     })
-  }
-
-  handleInput(event) {
-    this.debounceInput(event.composedPath()[0])
   }
 
   renderEmptyState() {
