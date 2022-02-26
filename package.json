@@ -1,5 +1,5 @@
 {
-  "name": "todo-bulba",
+  "name": "todo-bulba-template",
   "version": "1.0.0",
   "description": "A todo app using bulba-powered web components",
   "main": "index.js",
